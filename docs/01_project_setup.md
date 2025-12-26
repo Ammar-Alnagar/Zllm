@@ -1615,8 +1615,7 @@ int main() {
 Compile and run:
 
 ```bash
-nvcc -o test_cuda tests/cpp/test_cuda_setup.cu
-./test_cuda
+nvcc -ccbin g++-14 -arch=sm_89 -o test_cuda zllm/tests/cpp/test_kernels.cu -lstdc++ && ./test_cuda
 ```
 
 Expected output:
