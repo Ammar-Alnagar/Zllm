@@ -1,0 +1,62 @@
+# =============================================================================
+# pyproject.toml - Python Project Configuration
+# =============================================================================
+
+[build-system]
+requires = [
+    "setuptools>=65.0",
+    "wheel",
+    "cmake>=3.24",
+    "ninja",
+    "pybind11>=2.11",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mini_vllm"
+version = "0.1.0"
+description = "Mini vLLM - Educational LLM Inference Engine"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+keywords = ["llm", "inference", "cuda", "transformer", "vllm"]
+
+dependencies = [
+    "torch>=2.1.0",
+    "tiktoken>=0.5.1",
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "numpy>=1.24.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.0.0",
+    "mypy>=1.0.0",
+    "pytest-asyncio>=0.21.0",
+]
+
+[project.scripts]
+mini-vllm-server = "mini_vllm.server:main"
+
+[tool.setuptools.packages.find]
+where = ["python"]
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
