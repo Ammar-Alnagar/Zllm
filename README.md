@@ -181,3 +181,12 @@ Inspired by:
 ---
 
 **Happy Learning! Start with `docs/00_introduction.md`**
+
+
+_____
+**future**
+
+16_quantization.md          # INT8/FP8 support
+17_multi_gpu.md             # Tensor parallelism
+18_speculative_decoding.md  # Draft models
+19_custom_sampling.md       # Beam search, etc.
