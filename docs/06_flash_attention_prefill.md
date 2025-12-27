@@ -251,7 +251,7 @@ Total: ~96 KB per tile (fits in Ampere+ SRAM)
 
 Create file: `mini_vllm/csrc/attention/flash_attention.cuh`
 
-```cuda
+```c++
 // =============================================================================
 // flash_attention.cuh - Flash Attention Header
 // =============================================================================
@@ -358,7 +358,7 @@ void flash_attention_varlen_forward(
 
 Create file: `mini_vllm/csrc/attention/flash_attention.cu`
 
-```cuda
+```c++
 // =============================================================================
 // flash_attention.cu - Flash Attention Implementation
 // =============================================================================
@@ -877,7 +877,7 @@ Mapping: kv_head_idx = q_head_idx / (num_q_heads / num_kv_heads)
 
 This is already handled in our kernel:
 
-```cuda
+```c++
 const int kv_head_idx = head_idx / (num_heads / num_kv_heads);
 ```
 
@@ -887,7 +887,7 @@ const int kv_head_idx = head_idx / (num_heads / num_kv_heads);
 
 Create file: `mini_vllm/tests/cpp/test_flash_attention.cu`
 
-```cuda
+```c++
 // =============================================================================
 // test_flash_attention.cu - Flash Attention Unit Tests
 // =============================================================================

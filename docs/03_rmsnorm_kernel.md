@@ -21,16 +21,16 @@
 
 LayerNorm:
 ┌─────────────────────────────────────────────────────────┐
-│  output = γ × (x - mean(x)) / sqrt(var(x) + ε) + β     │
+│  output = γ × (x - mean(x)) / sqrt(var(x) + ε) + β      │
 │                                                         │
 │  Requires: mean, variance computation + scale + shift   │
 └─────────────────────────────────────────────────────────┘
 
 RMSNorm:
 ┌─────────────────────────────────────────────────────────┐
-│  output = γ × x / sqrt(mean(x²) + ε)                   │
+│  output = γ × x / sqrt(mean(x²) + ε)                    │
 │                                                         │
-│  Requires: mean of squares only + scale (no shift!)    │
+│  Requires: mean of squares only + scale (no shift!)     │
 └─────────────────────────────────────────────────────────┘
 
 RMSNorm is ~10-15% faster because:
@@ -45,13 +45,13 @@ RMSNorm is ~10-15% faster because:
 Transformer Decoder Block:
 ┌────────────────────────────────────────┐
 │                                        │
-│   Input ──▶ [RMSNorm] ──▶ Attention   │  ◀── Pre-normalization
+│   Input ──▶ [RMSNorm] ──▶ Attention  │  ◀── Pre-normalization
 │                    │                   │
 │                    └──────────────┐    │
 │                                   │    │
 │   ┌───────────────────────────────┘    │
 │   │                                    │
-│   └──▶ [RMSNorm] ──▶ FFN              │  ◀── Pre-normalization
+│   └──▶ [RMSNorm] ──▶ FFN             │  ◀── Pre-normalization
 │                                        │
 └────────────────────────────────────────┘
 
@@ -127,10 +127,10 @@ Input tensor: [batch_size, seq_len, hidden_dim]
 
               hidden_dim (4096) ──────────────────────▶
           ┌───────────────────────────────────────────────┐
-   batch  │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ │ row 0
-    ×     │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ │ row 1
- seq_len  │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ │ row 2
-    │     │ ...                                          │
+   batch  │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │ row 0
+    ×     │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │ row 1
+ seq_len  │ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │ row 2
+    │     │ ...                                           │
     ▼     └───────────────────────────────────────────────┘
 
 Strategy:
@@ -167,7 +167,7 @@ Let's start with a straightforward implementation:
 
 Create file: `mini_vllm/csrc/kernels/rmsnorm.cuh`
 
-```cuda
+```c++
 // =============================================================================
 // rmsnorm.cuh - RMSNorm Kernel Header
 // =============================================================================
@@ -217,7 +217,7 @@ void rmsnorm_forward_fp16(
 
 Create file: `mini_vllm/csrc/kernels/rmsnorm.cu`
 
-```cuda
+```c++
 // =============================================================================
 // rmsnorm.cu - RMSNorm Kernel Implementation
 // =============================================================================
@@ -368,7 +368,7 @@ Let's optimize:
 
 Add to `rmsnorm.cu`:
 
-```cuda
+```c++
 // =============================================================================
 // Optimized Implementation
 // =============================================================================
@@ -568,7 +568,7 @@ For even better performance, we can fuse RMSNorm with other operations:
 
 Add to `rmsnorm.cu`:
 
-```cuda
+```c++
 // =============================================================================
 // Fused RMSNorm + Residual Addition
 // =============================================================================
@@ -689,7 +689,7 @@ For production, we need FP16 support:
 
 Add to `rmsnorm.cu`:
 
-```cuda
+```c++
 // =============================================================================
 // FP16 (Half Precision) Implementation
 // =============================================================================
@@ -835,7 +835,7 @@ void rmsnorm_forward_fp16(
 
 Create file: `mini_vllm/tests/cpp/test_rmsnorm.cu`
 
-```cuda
+```c++
 // =============================================================================
 // test_rmsnorm.cu - RMSNorm Unit Tests
 // =============================================================================

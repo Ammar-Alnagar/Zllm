@@ -346,7 +346,7 @@ set_target_properties(mini_vllm_static PROPERTIES
 
 Create file: `mini_vllm/csrc/include/common.cuh`
 
-```cuda
+```c++
 // =============================================================================
 // common.cuh - Common CUDA Utilities
 // =============================================================================
@@ -594,7 +594,7 @@ __device__ __forceinline__ bf16 float_to_bf16(float x) {
 
 Create file: `mini_vllm/csrc/include/cuda_utils.cuh`
 
-```cuda
+```c++
 // =============================================================================
 // cuda_utils.cuh - CUDA Utility Functions
 // =============================================================================
@@ -1565,7 +1565,7 @@ python3 -c "import torch; print(f'PyTorch: {torch.__version__}, CUDA: {torch.cud
 
 Create file: `mini_vllm/tests/cpp/test_cuda_setup.cu`
 
-```cuda
+```c++
 // =============================================================================
 // test_cuda_setup.cu - Verify CUDA is working
 // =============================================================================

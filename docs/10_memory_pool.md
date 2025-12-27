@@ -124,7 +124,7 @@ Solution: Careful memory planning + pooling
 
 Create file: `mini_vllm/csrc/memory/memory_pool.cuh`
 
-```cuda
+```c++
 // =============================================================================
 // memory_pool.cuh - GPU Memory Pool Header
 // =============================================================================
@@ -511,7 +511,7 @@ private:
 
 Create file: `mini_vllm/csrc/memory/memory_utils.cu`
 
-```cuda
+```c++
 // =============================================================================
 // memory_utils.cu - Memory Utility Functions
 // =============================================================================

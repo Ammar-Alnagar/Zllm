@@ -167,7 +167,7 @@ We implement Option 2 for production
 
 Create file: `mini_vllm/csrc/kernels/swiglu.cuh`
 
-```cuda
+```c++
 // =============================================================================
 // swiglu.cuh - SwiGLU Activation Header
 // =============================================================================
@@ -240,7 +240,7 @@ void fused_gate_up_swiglu(
 
 Create file: `mini_vllm/csrc/kernels/swiglu.cu`
 
-```cuda
+```c++
 // =============================================================================
 // swiglu.cu - SwiGLU Activation Implementation
 // =============================================================================
@@ -587,7 +587,7 @@ We can fuse the gate/up projections with SwiGLU using cuBLAS + custom kernel:
 
 Add to `swiglu.cu`:
 
-```cuda
+```c++
 // =============================================================================
 // Integration with cuBLAS for Full FFN
 // =============================================================================
@@ -726,7 +726,7 @@ __global__ void swiglu_split_kernel(
 
 Create file: `mini_vllm/tests/cpp/test_swiglu.cu`
 
-```cuda
+```c++
 // =============================================================================
 // test_swiglu.cu - SwiGLU Unit Tests
 // =============================================================================

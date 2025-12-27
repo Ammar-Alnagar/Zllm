@@ -171,7 +171,7 @@ For position m, dimension pair i:
 
 Create file: `mini_vllm/csrc/kernels/rope.cuh`
 
-```cuda
+```c++
 // =============================================================================
 // rope.cuh - Rotary Position Embedding Header
 // =============================================================================
@@ -249,7 +249,7 @@ void rope_forward_fp16(
 
 Create file: `mini_vllm/csrc/kernels/rope.cu`
 
-```cuda
+```c++
 // =============================================================================
 // rope.cu - Rotary Position Embedding Implementation
 // =============================================================================
@@ -625,7 +625,7 @@ KV Heads:        K0/V0            K1/V1                 K7/V7
 
 For RoPE, we apply to ALL Q heads but only to the distinct KV heads:
 
-```cuda
+```c++
 // =============================================================================
 // RoPE Kernel for GQA (Already handled above, but here's clarification)
 // =============================================================================
@@ -646,7 +646,7 @@ For RoPE, we apply to ALL Q heads but only to the distinct KV heads:
 
 Create file: `mini_vllm/tests/cpp/test_rope.cu`
 
-```cuda
+```c++
 // =============================================================================
 // test_rope.cu - RoPE Unit Tests
 // =============================================================================

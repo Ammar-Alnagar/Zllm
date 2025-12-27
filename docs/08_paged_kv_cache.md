@@ -503,7 +503,7 @@ namespace mini_vllm {
 
 Create file: `mini_vllm/csrc/memory/kv_cache.cuh`
 
-```cuda
+```c++
 // =============================================================================
 // kv_cache.cuh - KV Cache CUDA Operations
 // =============================================================================
@@ -599,7 +599,7 @@ void kv_cache_reshape(
 
 Create file: `mini_vllm/csrc/memory/kv_cache.cu`
 
-```cuda
+```c++
 // =============================================================================
 // kv_cache.cu - KV Cache CUDA Operations Implementation
 // =============================================================================

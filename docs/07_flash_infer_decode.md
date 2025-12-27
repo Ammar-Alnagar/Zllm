@@ -192,7 +192,7 @@ For block b, token t, head h, dim d:
 
 Create file: `mini_vllm/csrc/attention/flash_infer.cuh`
 
-```cuda
+```c++
 // =============================================================================
 // flash_infer.cuh - FlashInfer Decode Attention Header
 // =============================================================================
@@ -260,7 +260,7 @@ void flash_infer_decode_fp16(
 
 Create file: `mini_vllm/csrc/attention/flash_infer.cu`
 
-```cuda
+```c++
 // =============================================================================
 // flash_infer.cu - FlashInfer Decode Attention Implementation
 // =============================================================================
@@ -748,7 +748,7 @@ Kernel processes all in parallel:
 
 Create file: `mini_vllm/tests/cpp/test_flash_infer.cu`
 
-```cuda
+```c++
 // =============================================================================
 // test_flash_infer.cu - FlashInfer Decode Tests
 // =============================================================================
