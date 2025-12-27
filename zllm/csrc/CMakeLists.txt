@@ -17,14 +17,11 @@ set(KERNEL_SOURCES
 set(ATTENTION_SOURCES
     attention/flash_attention.cu
     attention/flash_infer.cu
-    attention/paged_attention.cu
 )
 
 # Memory management sources
 set(MEMORY_SOURCES
-    memory/block_manager.cpp
     memory/kv_cache.cu
-    memory/memory_pool.cpp
 )
 
 # Python bindings
