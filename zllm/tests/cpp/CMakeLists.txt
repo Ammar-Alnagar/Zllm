@@ -6,14 +6,19 @@ find_package(CUDAToolkit REQUIRED)
 
 add_executable(test_kernels test_kernels.cu)
 add_executable(test_rmsnorm test_rmsnorm.cu)
+add_executable(test_rope test_rope.cu)
 
 target_link_libraries(test_kernels CUDA::cudart stdc++ m)
 target_link_libraries(test_rmsnorm CUDA::cudart stdc++ m)
+target_link_libraries(test_rope CUDA::cudart stdc++ m mini_vllm_static)
 
 set_target_properties(test_kernels PROPERTIES
     CUDA_SEPARABLE_COMPILATION ON
 )
 set_target_properties(test_rmsnorm PROPERTIES
+    CUDA_SEPARABLE_COMPILATION ON
+)
+set_target_properties(test_rope PROPERTIES
     CUDA_SEPARABLE_COMPILATION ON
 )
 
